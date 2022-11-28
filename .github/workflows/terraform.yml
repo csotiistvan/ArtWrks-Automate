@@ -82,7 +82,7 @@ jobs:
     #- name: Terraform Format
     #  run: terraform fmt -check
     
-    Setup Terraform variables
+    # Setup Terraform variables
     - name: Setup Terraform variables
      id: vars
      run: |-
