@@ -22,8 +22,8 @@ delete_on_termination = true
   }
 # Fill these tags with your data
 tags = {  
-Name = "Isti_Nginx"
+Name = "Schiele_Nginx"
 Email = "csoti.istvan.ifj@gmail.com"
-Comment = "Made with Terraform"
+Comment = "Made with Terraform thru Github CI/CD"
   }
 }

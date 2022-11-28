@@ -1,52 +1,48 @@
 # Application load balancer
 
-resource "aws_lb" "terraform-alb" {
-  name            = "terraform-alb"
+resource "aws_lb" "schiele-alb" {
+  name            = "schiele-alb"
   internal           = false
   load_balancer_type = "application"
   enable_http2 = false
   security_groups = [aws_security_group.generic_server.id]
-  subnets         = [
-        "subnet-027f7c79055623b47",
-        "subnet-0439b2e8286d570a6",
-        "subnet-0905bf7456c3c7de5"
-    ]
+  subnets         = [aws_subnet.sch-public.id]
   tags = {
-    Name = "Terraform_ALB_Isti"
+    Name = "Artworks_ALB_Schiele"
     Email = "csoti.istvan.ifj@gmail.com"
-    Comment = "Made with Terraform thru Github CI/CD hopefully"
+    Comment = "Made with Terraform thru Github CI/CD"
   }
 }
 
 # Target group for load balancer
 
-resource "aws_lb_target_group" "tf_group" {
-  name     = "terraform-alb-target"
+resource "aws_lb_target_group" "sch_group" {
+  name     = "schiele-alb-target"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = var.aws_vpc_id
+  vpc_id   = aws_vpc.schiele.id
   stickiness {
     type = "lb_cookie"
     enabled = false
   }
   health_check {
     port = 80
-    healthy_threshold = 2
-    unhealthy_threshold = 2
-    timeout = 2
-    interval = 5
+    healthy_threshold = 5
+    unhealthy_threshold = 5
+    timeout = 10
+    interval = 30
   }
 }
 
 # HTTP listener for the load balancer
 
-resource "aws_lb_listener" "tf_listener_http" {
-  load_balancer_arn = "${aws_lb.terraform-alb.arn}"
+resource "aws_lb_listener" "lb_listener_http" {
+  load_balancer_arn = "${aws_lb.schiele-alb.arn}"
   port              = "80"
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = "${aws_lb_target_group.tf_group.arn}"
+    target_group_arn = "${aws_lb_target_group.sch_group.arn}"
     type             = "forward"
   }
 }
