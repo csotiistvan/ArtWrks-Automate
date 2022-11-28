@@ -23,10 +23,8 @@ variable "aws_vpc_id" {
 
 }
 
-# variable "aws_subnets" {
+variable "environment" {
+   type      = string
+   sensitive = true
 
-#   type      = string
-
-#   sensitive = true
-
-# }
+ }
