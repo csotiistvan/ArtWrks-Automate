@@ -11,7 +11,7 @@ instance_type = "t2.micro"
 # Use your own .pem key, located in this folder
 key_name = "CloudBroWRCSI"
 vpc_security_group_ids = [aws_security_group.java_server.id]
-subnet_id              = aws_subnet.sch-public.id
+subnet_id              = aws_subnet.sch-public2.id
 associate_public_ip_address = true
 # Provision everything included in add-nginx.yaml using cloud-init
 user_data = data.template_file.provision_java.rendered
