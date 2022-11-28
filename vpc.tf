@@ -6,12 +6,19 @@ resource "aws_vpc" "schiele" {
   }
 }
 
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.schiele.id
+   tags = {
+    Name = "Schiele internet gateway"
+  }
+}
+
 resource "aws_subnet" "sch-public1" {
   vpc_id     = aws_vpc.schiele.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "eu-central-1a"
   tags = {
-    Name = "Schiele public subnet"
+    Name = "Schiele public subnet 1"
   }
 }
 
@@ -20,7 +27,7 @@ resource "aws_subnet" "sch-public2" {
   cidr_block = "10.0.2.0/24"
   availability_zone = "eu-central-1b"
   tags = {
-    Name = "Schiele public subnet"
+    Name = "Schiele public subnet 2"
   }
 }
 
@@ -29,7 +36,7 @@ resource "aws_subnet" "sch-private1" {
   cidr_block = "10.0.8.0/24"
   availability_zone = "eu-central-1b"
   tags = {
-    Name = "Schiele private subnet"
+    Name = "Schiele private subnet 1"
   }
 }
 
@@ -38,7 +45,7 @@ resource "aws_subnet" "sch-private2" {
   cidr_block = "10.0.9.0/24"
   availability_zone = "eu-central-1c"
   tags = {
-    Name = "Schiele private subnet"
+    Name = "Schiele private subnet 2"
   }
 }
 
