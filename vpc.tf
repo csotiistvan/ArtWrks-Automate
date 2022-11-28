@@ -58,18 +58,18 @@ resource "aws_internet_gateway" "gw" {
   }
 }
 
-resource "aws_nat_gateway" "sch_nat" {
-  allocation_id = aws_eip.sch_nat.id
-  subnet_id     = aws_subnet.sch-public1.id
+# resource "aws_nat_gateway" "sch_nat" {
+#   allocation_id = aws_eip.sch_nat.id
+#   subnet_id     = aws_subnet.sch-public1.id
 
-  tags = {
-    Name = "NAT Gateway"
-  }
+#   tags = {
+#     Name = "NAT Gateway"
+#   }
 
-  # To ensure proper ordering, it is recommended to add an explicit dependency
-  # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.gw]
-}
+#   # To ensure proper ordering, it is recommended to add an explicit dependency
+#   # on the Internet Gateway for the VPC.
+#   depends_on = [aws_internet_gateway.gw]
+# }
 
 resource "aws_route_table" "sch_route_table" {
   vpc_id = aws_vpc.schiele.id
