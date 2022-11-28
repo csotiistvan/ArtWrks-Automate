@@ -24,11 +24,11 @@ resource "aws_subnet" "sch-public2" {
   }
 }
 
-# resource "aws_subnet" "sch-private" {
-#   vpc_id     = aws_vpc.schiele.id
-#   cidr_block = "10.0.1.0/24"
-#   availability_zone = "eu-cental-1"
-#   tags = {
-#     Name = "Schiele private subnet"
-#   }
-# }
+resource "aws_subnet" "sch-private" {
+  vpc_id     = aws_vpc.schiele.id
+  cidr_block = "10.0.3.0/24"
+  availability_zone = "eu-central-1c"
+  tags = {
+    Name = "Schiele private subnet"
+  }
+}
