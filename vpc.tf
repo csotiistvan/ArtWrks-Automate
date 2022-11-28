@@ -24,11 +24,29 @@ resource "aws_subnet" "sch-public2" {
   }
 }
 
-resource "aws_subnet" "sch-private" {
+resource "aws_subnet" "sch-private1" {
   vpc_id     = aws_vpc.schiele.id
   cidr_block = "10.0.3.0/24"
   availability_zone = "eu-central-1c"
   tags = {
     Name = "Schiele private subnet"
+  }
+}
+
+resource "aws_subnet" "sch-private2" {
+  vpc_id     = aws_vpc.schiele.id
+  cidr_block = "10.0.4.0/24"
+  availability_zone = "eu-central-1c"
+  tags = {
+    Name = "Schiele private subnet"
+  }
+}
+
+resource "aws_db_subnet_group" "subnet_group" {
+  name       = "subnet_group"
+  subnet_ids = [aws_subnet.sch-private1.id, aws_subnet.sch-private2.id]
+
+  tags = {
+    Name = "My DB subnet group"
   }
 }
