@@ -27,7 +27,7 @@ resource "aws_subnet" "sch-public2" {
 resource "aws_subnet" "sch-private1" {
   vpc_id     = aws_vpc.schiele.id
   cidr_block = "10.0.8.0/24"
-  availability_zone = "eu-central-1c"
+  availability_zone = "eu-central-1b"
   tags = {
     Name = "Schiele private subnet"
   }
