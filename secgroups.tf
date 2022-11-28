@@ -2,6 +2,7 @@
 resource "aws_security_group" "generic_server" { # Use your own security group name instead of 'wp-server', refer to this in wp-server.tf
 name = "generic-server"
 description = "Allow HTTP and SSH traffic"
+vpc_id      = aws_vpc.schiele.id
 
 ingress {
 from_port = 80
@@ -30,6 +31,7 @@ cidr_blocks = ["0.0.0.0/0"]
 resource "aws_security_group" "java_server" { # Use your own security group name instead of 'wp-server', refer to this in wp-server.tf
 name = "java-server"
 description = "Allow HTTP and SSH traffic"
+vpc_id      = aws_vpc.schiele.id
 
 ingress {
 from_port = 80
@@ -58,6 +60,7 @@ cidr_blocks = ["0.0.0.0/0"]
 resource "aws_security_group" "postgres_server" { # Use your own security group name instead of 'wp-server', refer to this in wp-server.tf
 name = "postgres-server"
 description = "Allow HTTP and SSH traffic"
+vpc_id      = aws_vpc.schiele.id
 
 ingress {
 from_port = 5432

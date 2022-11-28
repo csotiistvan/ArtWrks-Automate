@@ -6,7 +6,7 @@ resource "aws_lb" "schiele-alb" {
   load_balancer_type = "application"
   enable_http2 = false
   security_groups = [aws_security_group.generic_server.id]
-  subnets         = [aws_subnet.sch-public.id]
+  subnets         = [aws_subnet.sch-public1.id, aws_subnet.sch-public2.id]
   tags = {
     Name = "Artworks_ALB_Schiele"
     Email = "csoti.istvan.ifj@gmail.com"
