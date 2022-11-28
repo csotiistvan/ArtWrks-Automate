@@ -6,6 +6,7 @@ resource "aws_db_instance" "schiele_db" {
   engine               = "postgres"
   engine_version       = "13.7"
   instance_class       = "db.t3.micro"
+  vpc_id               = aws_vpc.schiele.id
   availability_zone    = "eu-central-1c"
   username             = "dbadmin"
   password             = "verysafepassword"
