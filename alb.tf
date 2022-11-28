@@ -14,7 +14,7 @@ resource "aws_lb" "terraform-alb" {
   tags = {
     Name = "Terraform_ALB_Isti"
     Email = "csoti.istvan.ifj@gmail.com"
-    Comment = "Made with Terraform thru Github CI/CD"
+    Comment = "Made with Terraform thru Github CI/CD hopefully"
   }
 }
 
