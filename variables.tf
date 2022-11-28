@@ -23,8 +23,7 @@ variable "aws_vpc_id" {
 
 }
 
-variable "environment" {
-   type      = string
-   sensitive = true
-
- }
+#variable "environment" {
+#   type      = string
+#   sensitive = true
+# }
