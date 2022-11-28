@@ -86,7 +86,7 @@ jobs:
     - name: Setup Terraform variables
       id: vars
       run: |-
-        cat > terraform.tfvars <<EOF
+        cat >> terraform.tfvars <<EOF
         environment = "${{ fromJSON('["pr", "main"]')[github.ref == 'refs/heads/main'] }}"
         EOF
 
