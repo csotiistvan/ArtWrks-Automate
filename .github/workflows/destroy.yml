@@ -2,6 +2,8 @@
 
 name: Manual Destroy
 
+concurrency: production
+
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
@@ -21,7 +23,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Murder Terraform'
     runs-on: ubuntu-latest
     environment: production
 
