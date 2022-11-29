@@ -4,7 +4,7 @@ resource "aws_db_instance" "schiele_db" {
 #  max_allocated_storage = 100
   db_name              = "newimagedb"
   engine               = "postgres"
-  engine_version       = "15.1"
+  engine_version       = "14.5"
   instance_class       = "db.t3.micro"
   availability_zone    = "eu-central-1c"
   db_subnet_group_name = aws_db_subnet_group.subnet_group.id
