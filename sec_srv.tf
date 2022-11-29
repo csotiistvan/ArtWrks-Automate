@@ -1,6 +1,6 @@
 # Give location of the cloud-config file
-data "template_file" "provision_apache" {
-template = file("scripts/add-apache.yaml")  
+data "template_file" "provision_ngx" {
+template = file("scripts/add-docked-ngx.yaml")  
 }
 
 #EC2 Instance
@@ -14,8 +14,8 @@ vpc_security_group_ids = [aws_security_group.generic_server.id]
 subnet_id              = aws_subnet.sch-public2.id
 depends_on = [aws_internet_gateway.gw]
 associate_public_ip_address = true
-# Provision everything included in add-nginx.yaml using cloud-init
-user_data = data.template_file.provision_apache.rendered
+# Provision everything included in add-docked-ngx.yaml using cloud-init
+user_data = data.template_file.provision_ngx.rendered
 root_block_device {
 volume_type = "gp2"
 volume_size = "8"
