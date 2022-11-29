@@ -15,8 +15,7 @@ on:
   pull_request:
     branches:
       - main
-
-on: repository_dispatch
+  repository_dispatch
 
 # on:
 #   workflow_run:
