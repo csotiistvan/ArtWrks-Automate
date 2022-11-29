@@ -16,6 +16,8 @@ on:
     branches:
       - main
 
+on: repository_dispatch
+
 # on:
 #   workflow_run:
 #     workflows: [Terraform]

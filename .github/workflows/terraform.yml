@@ -50,8 +50,18 @@ on:
   workflow_run:
     workflows: [DockerHub]
     types: [completed]
-
-# on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Identify yourself, human!'
+        # Default value if no value is explicitly provided
+        default: 'Meatbag'
+        # Input has to be provided for the workflow to run
+        required: true
+#  repository_dispatch
+#  on:
 #   push:
 #     branches: [ "main" ]
 #   pull_request:
