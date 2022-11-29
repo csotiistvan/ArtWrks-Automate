@@ -8,13 +8,17 @@ runcmd:
   - sudo touch /home/ubuntu/test.txt
 # Update apt packages
   - sudo apt-get update
+# Docker
+  - sudo curl -fsSL https://get.docker.com | sudo sh
+  - sudo docker pull ashcroftt/nginx-test-artwrks:latest
+  - sudo docker run -d -p 80:80 ashcroftt/nginx-test-artwrks:main
 # Install all dependencies
-  - sudo apt install -y apache2
-  - cd /var/www
-  - sudo echo "hello terraform Apache" >> index.html
-  - sudo cp index.html html/index.html
+  # - sudo apt install -y apache2
+  # - cd /var/www
+  # - sudo echo "hello terraform Apache" >> index.html
+  # - sudo cp index.html html/index.html
   # - cd /etc/apache2
   # - sudo sed -i 's/80/42069/' ports.conf
-  - sudo systemctl reload apache2
+  # - sudo systemctl reload apache2
 # Create file to denote script run is finished
   - sudo touch /home/ubuntu/apache_ready.csv
