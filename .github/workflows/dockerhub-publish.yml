@@ -17,6 +17,16 @@ on:
       - main
   repository_dispatch:
     types: [new-build]
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'You really want to rebuild the containers?'
+        # Default value if no value is explicitly provided
+        default: 'I guess?'
+        # Input has to be provided for the workflow to run
+        required: true
 
 # on:
 #   workflow_run:
