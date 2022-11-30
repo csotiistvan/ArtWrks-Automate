@@ -66,7 +66,7 @@ jobs:
           #path: ./webserver
           push: true
           #tags: ${{ steps.meta.outputs.tags }}
-          tags: ashcroftt/web:latest
+          tags: ashcroftt/web:latestest
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Build and push Docker image 2
@@ -76,5 +76,5 @@ jobs:
           #path: ./webserver
           push: true
           #tags: ${{ steps.meta.outputs.tags }}
-          tags: ashcroftt/jar:latest
+          tags: ashcroftt/jar:latestest
           labels: ${{ steps.meta.outputs.labels }}
