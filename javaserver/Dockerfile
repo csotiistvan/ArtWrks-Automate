@@ -5,4 +5,4 @@
 FROM jetty
 COPY fileshare.jar usr/local/jetty/fileshare.jar
 
-RUN java -jar "$JETTY_HOME/fileshare.jar" --add-to-startd=jmx,stats
+#RUN java -jar "$JETTY_HOME/fileshare.jar" --add-to-startd=jmx,stats
