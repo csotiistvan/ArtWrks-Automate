@@ -28,9 +28,9 @@ resource "aws_lb_target_group" "sch_group" {
   }
   health_check {
     port = 80
-    healthy_threshold = 5
-    unhealthy_threshold = 5
-    timeout = 5
+    healthy_threshold = 3
+    unhealthy_threshold = 3
+    timeout = 3
     interval = 5
   }
 }
