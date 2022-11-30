@@ -1,5 +1,3 @@
-FROM nginx
-COPY index.html /usr/share/nginx/html/index.html
-COPY vite.svg /usr/share/nginx/html/vite.svg
-ADD /assets /usr/share/nginx/html/assets
+FROM httpd
+ADD /public-html /usr/local/apache2/htdocs/
 #stuff, uses node.js, json, js, jsx react
