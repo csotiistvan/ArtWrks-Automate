@@ -1,0 +1,34 @@
+#cloud-config
+
+# Above line is not a comment, it is required for cloud-config to run, it is similar to a shebang line in bash!
+
+# Run all the config commands
+runcmd:
+# Update apt packages
+  - sudo apt-get update
+# Install webhook
+  - cd /home/ubuntu
+  - sudo apt-get install webhook
+  - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/hooks.json > hooks.json
+# Docker
+  - sudo curl -fsSL https://get.docker.com | sudo sh
+  - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/redeploy.sh > redeploy.sh
+  - sudo sh redeploy.sh
+  - sudo chmod 777 redeploy.sh
+  - sudo chown ubuntu:ubuntu redeploy.sh
+# Kill any process hogging port 9000
+  - sudo kill -9 `sudo lsof -t -i:9000`
+# Start webhook
+  - sudo webhook -hooks hooks.json -verbose
+  # - sudo docker pull ashcroftt/nginx-test-artwrks:latest
+  # - sudo docker run -d --name=SRV_CONTAINER -p 80:80 ashcroftt/nginx-test-artwrks:main
+# Install all dependencies
+  # - sudo apt install -y apache2
+  # - cd /var/www
+  # - sudo echo "hello terraform Apache" >> index.html
+  # - sudo cp index.html html/index.html
+  # - cd /etc/apache2
+  # - sudo sed -i 's/80/42069/' ports.conf
+  # - sudo systemctl reload apache2
+# Create file to denote script run is finished
+  - sudo touch /home/ubuntu/container_ready.csv
