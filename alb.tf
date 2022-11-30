@@ -4,7 +4,8 @@ resource "aws_lb" "schiele-alb" {
   name            = "schiele-alb"
   internal           = false
   load_balancer_type = "application"
-  enable_http2 = false
+#  enable_http2 = false
+#  preserve_host_header = true
   security_groups = [aws_security_group.generic_server.id]
   subnets         = [aws_subnet.sch-public1.id, aws_subnet.sch-public2.id]
   tags = {
@@ -29,8 +30,8 @@ resource "aws_lb_target_group" "sch_group" {
     port = 80
     healthy_threshold = 5
     unhealthy_threshold = 5
-    timeout = 10
-    interval = 30
+    timeout = 5
+    interval = 5
   }
 }
 

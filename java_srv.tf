@@ -14,7 +14,7 @@ vpc_security_group_ids = [aws_security_group.java_server.id]
 subnet_id              = aws_subnet.sch-public2.id
 depends_on = [aws_internet_gateway.gw]
 associate_public_ip_address = true
-# Provision everything included in add-nginx.yaml using cloud-init
+# Provision everything included in add-java.yaml using cloud-init
 user_data = data.template_file.provision_java.rendered
 root_block_device {
 volume_type = "gp2"
@@ -23,7 +23,7 @@ delete_on_termination = true
   }
 # Fill these tags with your data
 tags = {  
-Name = "Schiele_Java"
+Name = "Schiele_Javapache"
 Email = "csoti.istvan.ifj@gmail.com"
 Comment = "Made with Terraform thru Github CI/CD"
   }
