@@ -30,3 +30,6 @@ runcmd:
 
 # Create file to denote script run is finished
   - sudo touch /home/ubuntu/java_ready.csv
+#For reference
+#Interactive docker sesh
+#sudo docker exec -it JAR_CONTAINER bash
