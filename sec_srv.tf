@@ -1,7 +1,7 @@
 # Give location of the cloud-config file
-data "template_file" "provision_ngx" {
-template = file("scripts/add-docked-ngx.yaml")  
-}
+# data "template_file" "provision_ngx" {
+# template = file("scripts/add-docked-ngx.yaml")  
+# }
 
 #EC2 Instance
 
