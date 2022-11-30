@@ -25,6 +25,6 @@ delete_on_termination = true
 tags = {  
 Name = "Schiele_Javapache"
 Email = "csoti.istvan.ifj@gmail.com"
-Comment = "Made with Terraform thru Github CI/CD"
+Comment = "Made with Terraform thru Github CI/CD..."
   }
 }
