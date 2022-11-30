@@ -65,5 +65,16 @@ jobs:
           context: ./webserver
           #path: ./webserver
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          #tags: ${{ steps.meta.outputs.tags }}
+          tags: ashcroftt/web:latest
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push Docker image 2
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./javaserver
+          #path: ./webserver
+          push: true
+          #tags: ${{ steps.meta.outputs.tags }}
+          tags: ashcroftt/jar:latest
           labels: ${{ steps.meta.outputs.labels }}

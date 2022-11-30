@@ -4,21 +4,15 @@
 
 # Run all the config commands
 runcmd:
-# Make testfile to see cloud-init started
-  - sudo touch /home/ubuntu/test.txt
 # Update apt packages
   - sudo apt-get update
-# Install all dependencies
-  - sudo apt install -y default-jre
-  - sudo apt install -y default-jdk
-# Setup docker
 # Install webhook
   - cd /home/ubuntu
   - sudo apt-get install webhook
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/hooks.json > hooks.json
 # Docker
   - sudo curl -fsSL https://get.docker.com | sudo sh
-  - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/rejava.sh > redeploy.sh
+  - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/redeploy.sh > redeploy.sh
   - sudo sh redeploy.sh
   - sudo chmod 777 redeploy.sh
   - sudo chown ubuntu:ubuntu redeploy.sh
@@ -26,7 +20,5 @@ runcmd:
   - sudo kill -9 `sudo lsof -t -i:9000`
 # Start webhook
   - sudo webhook -hooks hooks.json -verbose
-
-
 # Create file to denote script run is finished
-  - sudo touch /home/ubuntu/java_ready.csv
+  - sudo touch /home/ubuntu/container_ready.csv

@@ -1,6 +1,9 @@
 # Give location of the cloud-config file
-data "template_file" "provision_nginx" {
-template = file("scripts/add-nginx.yaml")  
+# data "template_file" "provision_nginx" {
+# template = file("scripts/add-nginx.yaml")  
+# }
+data "template_file" "provision_ngx" {
+template = file("scripts/add-docked-ngx.yaml")  
 }
 
 #EC2 Instance
@@ -16,7 +19,8 @@ subnet_id              = aws_subnet.sch-public1.id
 depends_on = [aws_internet_gateway.gw]
 associate_public_ip_address = true
 # Provision everything included in add-nginx.yaml using cloud-init
-user_data = data.template_file.provision_nginx.rendered
+# user_data = data.template_file.provision_nginx.rendered
+user_data = data.template_file.provision_ngx.rendered
 root_block_device {
 volume_type = "gp2"
 volume_size = "8"
@@ -24,7 +28,7 @@ delete_on_termination = true
   }
 # Fill these tags with your data
 tags = {  
-Name = "Schiele_Nginx"
+Name = "Schiele_Docked_Nginx_1"
 Email = "csoti.istvan.ifj@gmail.com"
 Comment = "Made with Terraform thru Github CI/CD"
   }
