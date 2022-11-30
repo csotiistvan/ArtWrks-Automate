@@ -15,6 +15,7 @@ runcmd:
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/redeploy.sh > redeploy.sh
   - sudo sh redeploy.sh
   - sudo chmod 777 redeploy.sh
+  - sudo chown ubuntu:ubuntu redeploy.sh
 # Kill any process hogging port 9000
   - sudo kill -9 `sudo lsof -t -i:9000`
 # Start webhook

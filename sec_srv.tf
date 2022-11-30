@@ -23,7 +23,7 @@ delete_on_termination = true
   }
 # Fill these tags with your data
 tags = {  
-Name = "Schiele_Apache"
+Name = "Schiele_Docked_Nginx_2"
 Email = "csoti.istvan.ifj@gmail.com"
 Comment = "Made with Terraform thru Github CI/CD"
   }
