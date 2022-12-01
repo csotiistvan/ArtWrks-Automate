@@ -10,5 +10,5 @@ FROM ubuntu:18.04
 COPY fileshare.jar /home/ubuntu/fileshare.jar
 
 RUN apt-get update
-RUN apt-get install default-jre
+RUN apt install default-jre
 # RUN java -jar "/home/ubuntu/fileshare.jar"
