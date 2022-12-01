@@ -10,7 +10,7 @@ runcmd:
   - sudo apt-get update
 # Install all dependencies
   - sudo apt install -y default-jre
-  - sudo apt install -y default-jdk
+#  - sudo apt install -y default-jdk
 # Setup docker
 # Install webhook
   - cd /home/ubuntu
@@ -19,9 +19,9 @@ runcmd:
 # Docker
   - sudo curl -fsSL https://get.docker.com | sudo sh
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/rejava.sh > redeploy.sh
-  - sudo sh redeploy.sh
   - sudo chmod 777 redeploy.sh
   - sudo chown ubuntu:ubuntu redeploy.sh
+  - sudo sh redeploy.sh
 # Kill any process hogging port 9000
   - sudo kill -9 `sudo lsof -t -i:9000`
 # Start webhook
