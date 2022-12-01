@@ -28,3 +28,8 @@ Email = "csoti.istvan.ifj@gmail.com"
 Comment = "Made with Terraform thru Github CI/CD..."
   }
 }
+
+resource "aws_eip" "java_server_eip" {
+  instance = aws_instance.java_server.id
+  vpc      = true
+}
