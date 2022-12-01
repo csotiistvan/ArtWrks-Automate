@@ -13,13 +13,16 @@ runcmd:
 # Docker
   - sudo curl -fsSL https://get.docker.com | sudo sh
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/redeploy.sh > redeploy.sh
-  - sudo sh redeploy.sh
   - sudo chmod 777 redeploy.sh
   - sudo chown ubuntu:ubuntu redeploy.sh
+  - sudo docker pull ashcroftt/web:latestest 
+  - sudo docker run -d --name=APACHE -p 80:80 ashcroftt/web:latestest
 # Kill any process hogging port 9000
   - sudo kill -9 `sudo lsof -t -i:9000`
 # Start webhook
   - sudo webhook -hooks hooks.json -verbose
+# Cron job to auto-redeploy every 5 minutes IF there is a new release
+  - (sudo crontab -l ; echo "*/$(shuf -i 4-8 -n1) * * * * sudo bash /home/ubuntu/redeploy.sh ") | sudo crontab -
   # - sudo docker pull ashcroftt/nginx-test-artwrks:latest
   # - sudo docker run -d --name=SRV_CONTAINER -p 80:80 ashcroftt/nginx-test-artwrks:main
 # Install all dependencies
@@ -31,4 +34,4 @@ runcmd:
   # - sudo sed -i 's/80/42069/' ports.conf
   # - sudo systemctl reload apache2
 # Create file to denote script run is finished
-  - sudo touch /home/ubuntu/container_ready.csv
+  - sudo touch /home/ubuntu/apache_ready.csv

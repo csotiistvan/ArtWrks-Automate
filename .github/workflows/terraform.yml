@@ -47,9 +47,9 @@ name: 'Terraform'
 concurrency: production
 
 on:
-  workflow_run:
-    workflows: [DockerHub]
-    types: [completed]
+  # workflow_run:
+  #   workflows: [DockerHub]
+  #   types: [completed]
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:

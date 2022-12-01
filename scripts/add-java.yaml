@@ -21,17 +21,26 @@ runcmd:
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/rejava.sh > redeploy.sh
   - sudo chmod 777 redeploy.sh
   - sudo chown ubuntu:ubuntu redeploy.sh
-  - sudo sh redeploy.sh
-# Kill any process hogging port 9000
+#Initial setup only
+  - sudo apt install -y postgresql postgresql-contrib
+  - export PGPASSWORD="verysafepassword"
+  #- export PGPASSWORD="${{ secrets.PHPASSWD }}"
+  - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/create_db.sql > create_db.sql
+  - psql -h terraform-20221130164814864800000001.cblyp46gzosz.eu-central-1.rds.amazonaws.com -p 5432 -U dbadmin -d newimagedb -a -q -f /home/ubuntu/create_db.sql
+# Kill any process hogging our ports 
   - sudo kill -9 `sudo lsof -t -i:9000`
+  - sudo kill -9 `sudo lsof -t -i:5432`
+# Start JAR container
+  - sudo docker pull jutsz/jar:latest
+  - sudo docker run -d --name=JARJAR -p 80:8080 -p 5432:5432 jutsz/jar:latest
 # Start webhook
   - sudo webhook -hooks hooks.json -verbose
-
-
 # Create file to denote script run is finished
   - sudo touch /home/ubuntu/java_ready.csv
+# Cron job to auto-redeploy every 5 minutes IF there is a new release
+  - (sudo crontab -l ; echo "*/5 * * * * sudo bash /home/ubuntu/redeploy.sh ") | crontab -
 #For reference
 #Interactive docker sesh
-#sudo docker exec -it JAR_CONTAINER bash
+#sudo docker exec -it JARJAR /bin/bash
 #
 #psql -h terraform-20221130164814864800000001.cblyp46gzosz.eu-central-1.rds.amazonaws.com -p 5432 -U dbadmin newimagedb
