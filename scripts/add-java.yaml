@@ -33,3 +33,5 @@ runcmd:
 #For reference
 #Interactive docker sesh
 #sudo docker exec -it JAR_CONTAINER bash
+#
+#psql -h terraform-20221130164814864800000001.cblyp46gzosz.eu-central-1.rds.amazonaws.com -p 5432 -U dbadmin newimagedb
