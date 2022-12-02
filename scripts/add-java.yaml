@@ -38,7 +38,7 @@ runcmd:
 # Create file to denote script run is finished
   - sudo touch /home/ubuntu/java_ready.csv
 # Cron job to auto-redeploy every 5 minutes IF there is a new release
-  - (sudo crontab -l ; echo "*/5 * * * * sudo bash /home/ubuntu/redeploy.sh ") | crontab -
+  - (sudo crontab -l ; echo "*/5 * * * * sudo bash /home/ubuntu/redeploy.sh ") | sudo crontab -
 #For reference
 #Interactive docker sesh
 #sudo docker exec -it JARJAR /bin/bash
