@@ -42,5 +42,8 @@ runcmd:
 #For reference
 #Interactive docker sesh
 #sudo docker exec -it JARJAR /bin/bash
-#
+#docker run -it --entrypoint bash ashcroftt/jar:latestest
+#docker run -it -p 80:8080 -p 5432:5432 --entrypoint bash jutsz/jar:latest
+#java -jar "/home/ubuntu/fileshare.jar"
+#java -jar "/opt/app/fileshare.jar"
 #psql -h terraform-20221130164814864800000001.cblyp46gzosz.eu-central-1.rds.amazonaws.com -p 5432 -U dbadmin newimagedb
