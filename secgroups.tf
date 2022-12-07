@@ -1,12 +1,19 @@
 #Web server security group
 resource "aws_security_group" "generic_server" { # Use your own security group name instead of 'wp-server', refer to this in wp-server.tf
 name = "generic-server"
-description = "Allow HTTP, webhook and SSH traffic"
+description = "Allow HTTP, HTTPS, webhook and SSH traffic"
 vpc_id      = aws_vpc.schiele.id
 
 ingress {
 from_port = 80
 to_port = 80
+protocol = "tcp"
+cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ingress {
+from_port = 443
+to_port = 443
 protocol = "tcp"
 cidr_blocks = ["0.0.0.0/0"]
   }
@@ -37,7 +44,7 @@ cidr_blocks = ["0.0.0.0/0"]
 
 resource "aws_security_group" "java_server" { # Use your own security group name instead of 'wp-server', refer to this in wp-server.tf
 name = "java-server"
-description = "Allow HTTP, webhook, and SSH traffic"
+description = "Allow HTTP, HTTPS, webhook, and SSH traffic"
 vpc_id      = aws_vpc.schiele.id
 
 ingress {
@@ -48,8 +55,8 @@ cidr_blocks = ["0.0.0.0/0"]
   }
 
 ingress {
-from_port = 8080
-to_port = 80
+from_port = 443
+to_port = 443
 protocol = "tcp"
 cidr_blocks = ["0.0.0.0/0"]
   }

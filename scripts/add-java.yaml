@@ -8,10 +8,6 @@ runcmd:
   - sudo touch /home/ubuntu/test.txt
 # Update apt packages
   - sudo apt-get update
-# Install all dependencies
-  - sudo apt install -y default-jre
-#  - sudo apt install -y default-jdk
-# Setup docker
 # Install webhook
   - cd /home/ubuntu
   - sudo apt-get install webhook
@@ -24,26 +20,29 @@ runcmd:
 #Initial setup only
   - sudo apt install -y postgresql postgresql-contrib
   - export PGPASSWORD="verysafepassword"
-  #- export PGPASSWORD="${{ secrets.PHPASSWD }}"
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/create_db.sql > create_db.sql
-  - psql -h terraform-20221130164814864800000001.cblyp46gzosz.eu-central-1.rds.amazonaws.com -p 5432 -U dbadmin -d newimagedb -a -q -f /home/ubuntu/create_db.sql
+#  - psql -h terraform-20221130164814864800000001.cblyp46gzosz.eu-central-1.rds.amazonaws.com -p 5432 -U dbadmin -d newimagedb -a -q -f /home/ubuntu/create_db.sql
 # Kill any process hogging our ports 
   - sudo kill -9 `sudo lsof -t -i:9000`
   - sudo kill -9 `sudo lsof -t -i:5432`
 # Start JAR container
   - sudo docker pull jutsz/jar:latest
-  - sudo docker run -d --name=JARJAR -p 80:8080 -p 5432:5432 jutsz/jar:latest
+  - sudo docker run -d --name=JARJAR -p 80:8080 jutsz/jar:latest
 # Start webhook
   - sudo webhook -hooks hooks.json -verbose
+# Redeploy webhook is: http://3.66.103.135:9000/hooks/redeploy
+# Cron job to start services at startup and auto-redeploy every 5 minutes IF there is a new release
+  - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/setupcron.sh | sudo sh
 # Create file to denote script run is finished
   - sudo touch /home/ubuntu/java_ready.csv
-# Cron job to auto-redeploy every 5 minutes IF there is a new release
-  - (sudo crontab -l ; echo "*/5 * * * * sudo bash /home/ubuntu/redeploy.sh ") | sudo crontab -
+
 #For reference
 #Interactive docker sesh
 #sudo docker exec -it JARJAR /bin/bash
 #docker run -it --entrypoint bash ashcroftt/jar:latestest
-#docker run -it -p 80:8080 -p 5432:5432 --entrypoint bash jutsz/jar:latest
+#docker run -it -p 80:8080 --entrypoint bash jutsz/jar:latest
 #java -jar "/home/ubuntu/fileshare.jar"
 #java -jar "/opt/app/fileshare.jar"
+#curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/.env > .env
 #psql -h terraform-20221130164814864800000001.cblyp46gzosz.eu-central-1.rds.amazonaws.com -p 5432 -U dbadmin newimagedb
+#export $(grep -v '^#' .env | xargs)

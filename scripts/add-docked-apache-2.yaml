@@ -15,14 +15,21 @@ runcmd:
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/redeploy.sh > redeploy.sh
   - sudo chmod 777 redeploy.sh
   - sudo chown ubuntu:ubuntu redeploy.sh
-  - sudo docker pull ashcroftt/web:latestest 
-  - sudo docker run -d --name=APACHE -p 80:80 ashcroftt/web:latestest
+  - sudo docker pull hordodonga/web:latest
+  - sudo docker run -d --name=APACHE -p 80:80 hordodonga/web:latest
 # Kill any process hogging port 9000
   - sudo kill -9 `sudo lsof -t -i:9000`
 # Start webhook
   - sudo webhook -hooks hooks.json -verbose
-# Cron job to auto-redeploy every 5 minutes IF there is a new release
-  - (sudo crontab -l ; echo "*/$(shuf -i 4-8 -n1) * * * * sudo bash /home/ubuntu/redeploy.sh ") | sudo crontab -
+# Redeploy webhook is: http://0.0.0.0:9000/hooks/redeploy change this when new elastic ip available
+# Cron job to auto-redeploy every 4-8 minutes IF there is a new release
+# Cron job to start services at startup and auto-redeploy every 5 minutes IF there is a new release
+  - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/setupcron.sh > setupcron.sh
+  - sudo setupcron.sh
+# Create file to denote script run is finished
+  - sudo touch /home/ubuntu/apache_ready.csv
+
+#For reference
   # - sudo docker pull ashcroftt/nginx-test-artwrks:latest
   # - sudo docker run -d --name=SRV_CONTAINER -p 80:80 ashcroftt/nginx-test-artwrks:main
 # Install all dependencies
@@ -33,5 +40,3 @@ runcmd:
   # - cd /etc/apache2
   # - sudo sed -i 's/80/42069/' ports.conf
   # - sudo systemctl reload apache2
-# Create file to denote script run is finished
-  - sudo touch /home/ubuntu/apache_ready.csv
