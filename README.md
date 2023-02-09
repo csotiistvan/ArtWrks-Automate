@@ -21,7 +21,23 @@ to the live environment. For a flowchart detailing the workflow, please refer to
 
 ## How to use this repository
 
+### Requirements
+
+To use this repository, you will need to have accounts for the followintg platforms:
+- [GitHub](https://docs.github.com/en/get-started/signing-up-for-github/signing-up-for-a-new-github-account)
+- [AWS](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) Related secrets are AWS_ACC_KEY (API Access Key) and AWS_SECRET_KEY (API Secret Key)
+- [Terraform](https://developer.hashicorp.com/terraform/tutorials/cloud-get-started/cloud-sign-up) Related secrets are TF_API_TOKEN (API Access token)
+- [Docker Hub](https://docs.docker.com/docker-id/) Related secrets are DOCKERHUB_USERNAME and DOCKERHUB_PASSWORD
+
+The respective credentials or tokens need to be set up in your Github Actions secrets. Please make sure to have a local backup of these details as once saved, you will not be able to view them again. 
+
+### Setting up your repositories
+
+TBC
+
 ## Todos
+
+TBC
 
 ## Main contributors
 
