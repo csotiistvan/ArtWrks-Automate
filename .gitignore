@@ -8,6 +8,11 @@
 
 **/.terraform.*
 
+# Local .database directories
+
+**/.database/*
+
+**/.database.*
 
 # .tfstate files
 
