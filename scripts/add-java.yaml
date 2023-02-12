@@ -29,7 +29,7 @@ runcmd:
   - sudo docker pull jutsz/jar:latest
   - sudo docker run -d --name=JARJAR -p 80:8080 jutsz/jar:latest
 # Start webhook
-  - sudo webhook -hooks hooks.json -verbose
+  - sudo webhook -hooks /home/ubuntu/hooks.json -hotreload -nopanic &
 # Redeploy webhook is: http://3.66.103.135:9000/hooks/redeploy
 # Cron job to start services at startup and auto-redeploy every 5 minutes IF there is a new release
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/setupcron.sh | sudo sh

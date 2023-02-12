@@ -20,11 +20,13 @@ runcmd:
 # Kill any process hogging port 9000
   - sudo kill -9 `sudo lsof -t -i:9000`
 # Start webhook
-  - sudo webhook -hooks hooks.json -verbose
+  - sudo webhook -hooks /home/ubuntu/hooks.json -hotreload -nopanic &
 # Redeploy webhook is: http://0.0.0.0:9000/hooks/redeploy change this when new elastic ip available
 # Cron job to auto-redeploy every 4-8 minutes IF there is a new release
 # Cron job to start services at startup and auto-redeploy every 5 minutes IF there is a new release
   - sudo curl -fsSL https://raw.githubusercontent.com/csotiistvan/Docker-redeploy-with-webhooks/main/setupcron.sh > setupcron.sh
+  - sudo chmod 777 setupcron.sh
+  - sudo chown ubuntu:ubuntu setupcron.sh
   - sudo setupcron.sh
 # Create file to denote script run is finished
   - sudo touch /home/ubuntu/apache_ready.csv
