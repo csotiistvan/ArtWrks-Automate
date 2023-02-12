@@ -33,7 +33,7 @@ The respective credentials or tokens need to be set up in your Github Actions se
 
 ### Setting up your repositories
 
-The files included in the `external` folder should be added to the respective repositories. The .yml files contain the Github actions to pack and publish the built resources on Docker Hub. These files should be placed under `.github/workflows` in the repository. The Dockerfile can be added to any location, as long as you refer to the appropriate path in the .yml file. The repository secrets for Docker Hub login data need to be added in the settings. It is possible to automatically build your site/apps with Github actions as well if that is preferred, in this case the build actions can be added to the existing .yml.  
+The files included in the `external` folder should be added to the respective repositories. The .yml files contain the Github actions to pack and publish the built resources on Docker Hub. These files should be placed under `.github/workflows` in the repository. The Dockerfile can be added to any location, as long as you refer to the appropriate path in the .yml file. The repository secrets for Docker Hub login data need to be added in the settings. It is possible to automatically build your site/apps with Github actions as well if that is preferred, in this case the build actions can be added to the existing .yml. In case you prefer to use webhooks for container redeployment, you need to set those up as well in the settings.  
 
 ### Customizing code for your project
 
