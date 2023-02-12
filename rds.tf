@@ -10,7 +10,7 @@ resource "aws_db_instance" "schiele_db" {
   deletion_protection  = true
   db_subnet_group_name = aws_db_subnet_group.subnet_group.id
   username             = "dbadmin"
-  password             = "verysafepassword"
+  password             = var.db_password
   skip_final_snapshot  = true
 #  apply_immediately   = true
 #  enabled_cloudwatch_logs_exports = "postgresql"
